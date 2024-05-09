@@ -1,6 +1,7 @@
-import { rejects } from "assert";
 import nodemailer, { Transporter } from "nodemailer";
 import { wss } from "../../app";
+import { retrieveAllDataFromPinata, pinDataOnIPFs} from "./pinata";
+
 
 export const sendWebSocketMessage = (message: any, origin: string) => {
   wss.clients.forEach((client) => {
@@ -60,6 +61,14 @@ export const emailServer = async (
         );
       }
 
+      const dataToIpfs: any = {
+        employerFirstName: emailBody.senderFirstName,
+        employerLastName: emailBody.senderFirstName,
+        workerFirstName: emailBody.recipientFirstName,
+        workerLastName: emailBody.recipientLastName,
+        workerEmail: emailBody.recipientEmail
+      } 
+
       const mailOptions: nodemailer.SendMailOptions = {
         from: `<i***@gmail.com> ${emailBody.senderFirstName} ${emailBody.senderLastName}`,
         to: emailBody.recipientEmail,
@@ -75,13 +84,23 @@ export const emailServer = async (
       await delay(3000);
 
       const info = await transporter.sendMail(mailOptions);
+     
       console.log("Email sent:", info.response);
+
+      try{
+        const data = await pinDataOnIPFs(dataToIpfs)
+        console.log("Data Pinned:", data);
+
+      }catch(error:any) {
+        console.log(error,"error")
+      }
 
       sendWebSocketMessage(info.envelope, config.origin);
 
       sentEmails.push(info);
     }
-
+    const getAllPinnedData = await retrieveAllDataFromPinata()
+    console.log(JSON.stringify(getAllPinnedData),"allPinned")
     return {
       success: true,
       data: sentEmails,

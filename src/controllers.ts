@@ -61,7 +61,6 @@ app.post(
         const data = await readFileAsync(req.file.path);
 
         const text = data.toString();
-        console.log(text, "jeu");
 
         // Process the text data as needed
 

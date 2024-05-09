@@ -18,6 +18,7 @@ const server = app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
 
+
 export const wss = new WebSocket.Server({ server });
 
 wss.on("connection", function connection(ws) {
@@ -30,6 +31,7 @@ wss.on("connection", function connection(ws) {
     const clientId = data.client;
   });
 });
+
 
 app.use(express.json());
 
