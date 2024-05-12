@@ -5,6 +5,7 @@ import { emailServer } from "./src/utils/smtpServer";
 import { tokenGenerator, verifyToken } from "./src/utils/tokenGenerator";
 import cors from "cors";
 import WebSocket from "ws"
+import { pinDataOnIPFs } from "./src/utils/pinata";
 
 require("dotenv").config();
 
@@ -88,6 +89,17 @@ app.post(
       const separatedText = text.split(/\s+/).filter(Boolean);
 
       console.log(separatedText, "uie");
+      const dataToIpfs ={
+        data: separatedText
+      }
+
+      try{
+        const data = await pinDataOnIPFs(dataToIpfs)
+        console.log("Data Pinned:", data);
+
+      }catch(error:any) {
+        console.log(error,"error")
+      }
       const body = [];
       let i = 0;
       while (i < separatedText.length) {

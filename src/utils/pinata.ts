@@ -65,7 +65,15 @@ export const pinFileToIpfs = async (file, metaData) => {
 export const pinDataOnIPFs = async (data: any) => {
   try {
     const jsonData = {
-      data,
+      pinataMetadata: {
+        name: new Date(),
+        keyvalues: {
+          ItemID: `Bulkmailer`,
+        },
+      },
+      pinataContent: {
+        data
+      },
     };
 
     const res = await fetch("https://api.pinata.cloud/pinning/pinJSONToIPFS", {

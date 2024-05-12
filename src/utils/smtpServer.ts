@@ -87,13 +87,13 @@ export const emailServer = async (
      
       console.log("Email sent:", info.response);
 
-      try{
-        const data = await pinDataOnIPFs(dataToIpfs)
-        console.log("Data Pinned:", data);
+      // try{
+      //   const data = await pinDataOnIPFs(dataToIpfs)
+      //   console.log("Data Pinned:", data);
 
-      }catch(error:any) {
-        console.log(error,"error")
-      }
+      // }catch(error:any) {
+      //   console.log(error,"error")
+      // }
 
       sendWebSocketMessage(info.envelope, config.origin);
 
