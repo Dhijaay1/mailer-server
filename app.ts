@@ -62,14 +62,14 @@ app.post("/auth", async (req: Request, res: Response) => {
     });
   }
 });
-
+// k
 app.post(
   "/upload",
   upload.single("file"),
   async (req: Request, res: Response) => {
     try {
       if (!req.file) {
-        return res.status(400).send("No file uploaded.");
+        return res.status(400).send("No file uploaded");
       }
 
       const fileExtension = req.file.originalname
