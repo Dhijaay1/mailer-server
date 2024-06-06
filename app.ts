@@ -4,7 +4,7 @@ import fs from "fs";
 import { emailServer } from "./src/utils/smtpServer";
 import { tokenGenerator, verifyToken } from "./src/utils/tokenGenerator";
 import cors from "cors";
-import WebSocket from "ws"
+import WebSocket from "ws";
 import { pinDataOnIPFs } from "./src/utils/pinata";
 
 require("dotenv").config();
@@ -19,7 +19,6 @@ const server = app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
 
-
 export const wss = new WebSocket.Server({ server });
 
 wss.on("connection", function connection(ws) {
@@ -33,12 +32,11 @@ wss.on("connection", function connection(ws) {
   });
 });
 
-
 app.use(express.json());
 
 app.use(
   cors({
-    origin: "https://bulkmailer-fawn.vercel.app/",
+    origin: "https://bulkmailer-fawn.vercel.app",
     credentials: true,
   })
 );
@@ -62,7 +60,7 @@ app.post("/auth", async (req: Request, res: Response) => {
     });
   }
 });
-// k
+
 app.post(
   "/upload",
   upload.single("file"),
@@ -89,16 +87,16 @@ app.post(
       const separatedText = text.split(/\s+/).filter(Boolean);
 
       console.log(separatedText, "uie");
-      const dataToIpfs ={
+      const dataToIpfs = {
         data: separatedText
       }
 
-      try{
+      try {
         const data = await pinDataOnIPFs(dataToIpfs)
         console.log("Data Pinned:", data);
 
-      }catch(error:any) {
-        console.log(error,"error")
+      } catch (error: any) {
+        console.log(error, "error")
       }
       const body = [];
       let i = 0;
