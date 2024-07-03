@@ -17,7 +17,7 @@ app.use(
   })
 );
 
-const upload = multer({ dest: "uploads/" });
+const upload = multer({ dest: "uploads/stop" });
 app.post("/auth", async (req: Request, res: Response) => {
   const { token } = req.body;
   const generatedToken = process.env.ACCESS_TOKEN;
