@@ -81,7 +81,7 @@ export const emailServer = async (
         new Promise((resolve) => setTimeout(resolve, ms));
 
       // Send email after waiting for 3 seconds
-      await delay(3000);
+      await delay(4000);
 
       const info = await transporter.sendMail(mailOptions);
      
