@@ -73,7 +73,7 @@ export const emailServer = async (
         from: `<i***@gmail.com> ${emailBody.senderFirstName} ${emailBody.senderLastName}`,
         to: emailBody.recipientEmail,
         subject: config.subject,
-        text: `Hi ${emailBody.recipientFirstName},\n\n${config.content}\n\n\n ${config.greetings}`,
+        text: `Dear ${emailBody.recipientFirstName},\n\n${config.content}\n\n\n ${config.greetings}`,
       };
 
       // Create a promise that resolves after 3 seconds
