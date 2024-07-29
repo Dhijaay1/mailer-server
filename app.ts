@@ -36,7 +36,7 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: "https://bulkmailer-git-main-testmails-projects.vercel.app",
+    origin: "https://bulkmailer-fawn.vercel.app",
     credentials: true,
   })
 );
