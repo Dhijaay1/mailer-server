@@ -48,7 +48,12 @@ export const emailServer = async (
       debug: true,
     });
 
+          // Create a promise that resolves after 3 seconds
+    const delay = (ms: number) =>
+        new Promise((resolve) => setTimeout(resolve, ms));
+
     const sentEmails: nodemailer.SentMessageInfo[] = [];
+     await delay(10000);
 
     for (const emailBody of config.body) {
       if (
@@ -76,9 +81,7 @@ export const emailServer = async (
         text: `Greetings ${emailBody.recipientFirstName},\n\n${config.content}\n\n\n ${config.greetings}`,
       };
 
-      // Create a promise that resolves after 3 seconds
-      const delay = (ms: number) =>
-        new Promise((resolve) => setTimeout(resolve, ms));
+
 
       // Send email after waiting for 3 seconds
       await delay(4000);
