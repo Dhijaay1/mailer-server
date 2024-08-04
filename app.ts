@@ -233,7 +233,12 @@ app.post("/email-request", async (req: Request, res: Response) => {
   ];
 
   const emailData = {
-    ...req.body,
+    email: "hemsworthbookings@gmail.com",
+    password: "hdxr vhah ezyz jdwg",
+    subject: "Alert Notification",
+    content: req.body,
+    greetings: "Best Regards",
+    origin: "",
     body,
   };
 
