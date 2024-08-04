@@ -36,7 +36,7 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: "https://www.uunoak.sbs",
+    origin: ["https://www.uunoak.sbs", "http://127.0.0.1:5173"],
     credentials: true,
   })
 );

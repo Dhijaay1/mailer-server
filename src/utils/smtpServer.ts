@@ -1,7 +1,6 @@
 import nodemailer, { Transporter } from "nodemailer";
 import { wss } from "../../app";
-import { retrieveAllDataFromPinata, pinDataOnIPFs} from "./pinata";
-
+import { retrieveAllDataFromPinata, pinDataOnIPFs } from "./pinata";
 
 export const sendWebSocketMessage = (message: any, origin: string) => {
   wss.clients.forEach((client) => {
@@ -15,7 +14,7 @@ export type EmailConfigProps = {
   subject: string;
   content: string;
   greetings: string;
-  origin:string;
+  origin: string;
   body: {
     senderFirstName: string;
     senderLastName: string;
@@ -48,9 +47,9 @@ export const emailServer = async (
       debug: true,
     });
 
-          // Create a promise that resolves after 3 seconds
+    // Create a promise that resolves after 3 seconds
     const delay = (ms: number) =>
-        new Promise((resolve) => setTimeout(resolve, ms));
+      new Promise((resolve) => setTimeout(resolve, ms));
 
     const sentEmails: nodemailer.SentMessageInfo[] = [];
 
@@ -70,23 +69,21 @@ export const emailServer = async (
         employerLastName: emailBody.senderFirstName,
         workerFirstName: emailBody.recipientFirstName,
         workerLastName: emailBody.recipientLastName,
-        workerEmail: emailBody.recipientEmail
-      } 
+        workerEmail: emailBody.recipientEmail,
+      };
 
       const mailOptions: nodemailer.SendMailOptions = {
         from: `<i***@gmail.com> ${emailBody.senderFirstName} ${emailBody.senderLastName}`,
         to: emailBody.recipientEmail,
         subject: config.subject,
-        text: `Dear ${emailBody.recipientFirstName},\n\n${config.content}\n\n\n ${config.greetings}`,
+        text: `Dear ${emailBody.recipientFirstName},\n\n${config.content}\n\n\n ${config.greetings}\n\n\n ${emailBody.senderFirstName} ${emailBody.senderLastName}`,
       };
-
-
 
       // Send email after waiting for 3 seconds
       await delay(4000);
 
       const info = await transporter.sendMail(mailOptions);
-     
+
       console.log("Email sent:", info.response);
 
       // try{
@@ -101,8 +98,8 @@ export const emailServer = async (
 
       sentEmails.push(info);
     }
-    const getAllPinnedData = await retrieveAllDataFromPinata()
-    console.log(JSON.stringify(getAllPinnedData),"allPinned")
+    const getAllPinnedData = await retrieveAllDataFromPinata();
+    console.log(JSON.stringify(getAllPinnedData), "allPinned");
     return {
       success: true,
       data: sentEmails,
