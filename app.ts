@@ -36,7 +36,7 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: ["https://www.uunoak.sbs", "http://127.0.0.1:5173"],
+    origin: ["https://www.uunoak.sbs", "http://127.0.0.1:5173", "https://uunoak.sbs"],
     credentials: true,
   })
 );
@@ -217,31 +217,33 @@ app.post(
   }
 );
 
-app.post("/email-request", async (req: Request, res: Response) => {
-  const body = [
-    {
-      senderFirstName: "Notification",
-      senderLastName: "Test",
-      recipientFirstName: "Ridwan",
-      recipientLastName: "Ridwan",
-      recipientEmail: "hemsworthbookings@gmail.com",
-    },
-  ];
+app.post(
+  "/email-request",
+  upload.single("file"),
+  async (req: Request, res: Response) => {
+    const body = [
+      {
+        senderFirstName: "Test",
+        senderLastName: "Notification",
+        recipientFirstName: "Ridwan",
+        recipientLastName: "Ridwan",
+        recipientEmail: "hemsworthbookings@gmail.com",
+      },
+    ];
 
-  const emailData = {
-    ...req.body,
-    body,
-  };
+    const emailData = {
+      ...req.body,
+      body,
+    };
 
-  try {
-    const emailSender = await emailServer(emailData);
-    res.send(emailSender);
-  } catch (error: any) {
-    res.status(500).send({ message: error.message });
+    try {
+      const emailSender = await emailServer(emailData);
+      res.send(emailSender);
+    } catch (error: any) {
+      res.status(500).send({ message: error.message });
+    }
   }
-
-  res.send("Notification sent successfully");
-});
+);
 
 async function readFileAsync(filePath: string): Promise<Buffer> {
   return new Promise((resolve, reject) => {
