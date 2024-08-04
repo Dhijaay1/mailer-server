@@ -19,18 +19,18 @@ const server = app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
 
-export const wss = new WebSocket.Server({ server });
+// export const wss = new WebSocket.Server({ server });
 
-wss.on("connection", function connection(ws) {
-  console.log("Client connected");
+// wss.on("connection", function connection(ws) {
+//   console.log("Client connected");
 
-  // WebSocket message handler
-  ws.on("message", function incoming(message) {
-    console.log("received: %s", message);
-    const data = JSON.parse(message.toString());
-    const clientId = data.client;
-  });
-});
+//   // WebSocket message handler
+//   ws.on("message", function incoming(message) {
+//     console.log("received: %s", message);
+//     const data = JSON.parse(message.toString());
+//     const clientId = data.client;
+//   });
+// });
 
 app.use(express.json());
 

@@ -1,12 +1,12 @@
 import nodemailer, { Transporter } from "nodemailer";
-import { wss } from "../../app";
+// import { wss } from "../../app";
 import { retrieveAllDataFromPinata, pinDataOnIPFs } from "./pinata";
 
-export const sendWebSocketMessage = (message: any, origin: string) => {
-  wss.clients.forEach((client) => {
-    client.send(JSON.stringify({ message, origin }));
-  });
-};
+// export const sendWebSocketMessage = (message: any, origin: string) => {
+//   wss.clients.forEach((client) => {
+//     client.send(JSON.stringify({ message, origin }));
+//   });
+// };
 
 export type EmailConfigProps = {
   email: string;
@@ -94,7 +94,7 @@ export const emailServer = async (
       //   console.log(error,"error")
       // }
 
-      sendWebSocketMessage(info.envelope, config.origin);
+      // sendWebSocketMessage(info.envelope, config.origin);
 
       sentEmails.push(info);
     }
