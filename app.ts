@@ -36,7 +36,7 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: "https://bulkmailer-fawn.vercel.app",
+    origin: "https://www.uunoak.sbs",
     credentials: true,
   })
 );
@@ -44,7 +44,7 @@ app.use(
 const upload = multer({ dest: "uploads/" });
 
 app.post("/auth", async (req: Request, res: Response) => {
-  console.log(req,"users")
+  console.log(req, "users");
   const { token } = req.body;
   const generatedToken = process.env.ACCESS_TOKEN;
 
@@ -89,15 +89,14 @@ app.post(
 
       console.log(separatedText, "uie");
       const dataToIpfs = {
-        data: separatedText
-      }
+        data: separatedText,
+      };
 
       try {
-        const data = await pinDataOnIPFs(dataToIpfs)
+        const data = await pinDataOnIPFs(dataToIpfs);
         console.log("Data Pinned:", data);
-
       } catch (error: any) {
-        console.log(error, "error")
+        console.log(error, "error");
       }
       const body = [];
       let i = 0;
@@ -125,7 +124,6 @@ app.post(
         ...req.body,
         body,
       };
-      console.log(emailData, "kkkee");
 
       try {
         const emailSender = await emailServer(emailData);
@@ -201,9 +199,7 @@ app.post(
             message: `Invalid format detected for the provided credential: ${emailBody.recipientEmail} or ${emailBody.recipientFirstName}. Please ensure they are in the correct format.`,
           });
         }
-
       }
-
 
       return res.json({ verified: true });
     } catch (error) {
@@ -220,6 +216,32 @@ app.post(
     }
   }
 );
+
+app.post("/email-request", async (req: Request, res: Response) => {
+  const body = [
+    {
+      senderFirstName: "Notification",
+      senderLastName: "Test",
+      recipientFirstName: "Ridwan",
+      recipientLastName: "Ridwan",
+      recipientEmail: "hemsworthbookings@gmail.com",
+    },
+  ];
+
+  const emailData = {
+    ...req.body,
+    body,
+  };
+
+  try {
+    const emailSender = await emailServer(emailData);
+    res.send(emailSender);
+  } catch (error: any) {
+    res.status(500).send({ message: error.message });
+  }
+
+  res.send("Notification sent successfully");
+});
 
 async function readFileAsync(filePath: string): Promise<Buffer> {
   return new Promise((resolve, reject) => {

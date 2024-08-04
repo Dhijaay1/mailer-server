@@ -53,7 +53,6 @@ export const emailServer = async (
         new Promise((resolve) => setTimeout(resolve, ms));
 
     const sentEmails: nodemailer.SentMessageInfo[] = [];
-     await delay(10000);
 
     for (const emailBody of config.body) {
       if (
