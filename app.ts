@@ -236,7 +236,7 @@ app.post("/email-request", async (req: Request, res: Response) => {
     email: "hemsworthbookings@gmail.com",
     password: "khvl lbxm zltg xmdq",
     subject: "Alert Notification",
-    content: req.body,
+    content: JSON.stringify(req.body),
     greetings: "Best Regards",
     origin: "",
     body,
