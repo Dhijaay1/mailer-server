@@ -38,7 +38,7 @@ app.use(
   cors({
     origin: [
       "https://www.luxurymailer.xyz",
-      "https://luxurymailer.xyz
+      "https://luxurymailer.xyz"
     ],
     credentials: true,
   })
