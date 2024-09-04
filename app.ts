@@ -34,19 +34,12 @@ const server = app.listen(port, () => {
 
 app.use(express.json());
 
-const whitelist = ['http://localhost:4000']
-const corsOptions = {
-  origin: function (origin, callback) {
-    if (whitelist.includes(origin)) {
-      callback(null, true)
-    } else {
-      console.log('origin:', origin, 'not allowed')
-      callback(new Error('Not allowed by CORS'))
-    }
-  }
-}
-
-app.use(cors(corsOptions))
+app.use(
+  cors({
+    origin: ["http://localhost:4000"],
+    credentials: true,
+  })
+);
 
 const upload = multer({ dest: "uploads/" });
 
