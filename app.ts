@@ -37,8 +37,7 @@ app.use(express.json());
 app.use(
   cors({
     origin: [
-      "https://www.luxurymailer.xyz",
-      "https://luxurymailer.xyz"
+      "localhost"
     ],
     credentials: true,
   })
