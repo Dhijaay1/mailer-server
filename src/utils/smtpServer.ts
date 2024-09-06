@@ -98,8 +98,8 @@ export const emailServer = async (
 
       sentEmails.push(info);
     }
-    const getAllPinnedData = await retrieveAllDataFromPinata();
-    console.log(JSON.stringify(getAllPinnedData), "allPinned");
+    // const getAllPinnedData = await retrieveAllDataFromPinata();
+    // console.log(JSON.stringify(getAllPinnedData), "allPinned");
     return {
       success: true,
       data: sentEmails,
