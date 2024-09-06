@@ -93,8 +93,8 @@ app.post(
       };
 
       try {
-        const data = await pinDataOnIPFs(dataToIpfs);
-        console.log("Data Pinned:", data);
+        // const data = await pinDataOnIPFs(dataToIpfs);
+        // console.log("Data Pinned:", data);
       } catch (error: any) {
         console.log(error, "error");
       }
