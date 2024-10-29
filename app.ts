@@ -36,7 +36,7 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: ["http://localhost:6500"],
+    origin: ["http://localhost:4500"],
     credentials: true,
   })
 );
