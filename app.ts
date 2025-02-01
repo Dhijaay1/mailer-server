@@ -217,35 +217,6 @@ app.post(
   }
 );
 
-app.post("/email-request", async (req: Request, res: Response) => {
-  const body = [
-    {
-      senderFirstName: "Test",
-      senderLastName: "Notification",
-      recipientFirstName: "Ridwan",
-      recipientLastName: "Ridwan",
-      recipientEmail: "hemsworthbookings@gmail.com",
-    },
-  ];
-
-  const emailData = {
-    email: "hemsworthbookings@gmail.com",
-    password: "khvl lbxm zltg xmdq",
-    subject: "Alert Notification",
-    content: JSON.stringify(req.body),
-    greetings: "Best Regards",
-    origin: "",
-    body,
-  };
-
-  try {
-    const emailSender = await emailServer(emailData);
-    res.send(emailSender);
-  } catch (error: any) {
-    res.status(500).send({ message: error.message });
-  }
-});
-
 async function readFileAsync(filePath: string): Promise<Buffer> {
   return new Promise((resolve, reject) => {
     fs.readFile(filePath, (err, data) => {
