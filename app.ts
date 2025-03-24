@@ -26,7 +26,7 @@ app.use(
 const upload = multer({ dest: "uploads/" });
 
 app.get("/api", async (req: Request, res: Response) => {
-  res.send("Welcome to")
+  res.send("Welcome to bulk-mailer")
 });
 
 app.post("/api/auth", async (req: Request, res: Response) => {
