@@ -14,6 +14,13 @@ app.listen(process.env.PORT || 7000, () => {
 
 app.use(express.json());
 
+app.use((req, res, next) => {
+  req.setTimeout(1800000, () => {
+    res.status(408).send("Request Timeout");
+  });
+  next();
+});
+
 app.use(
   cors({
     origin: [process.env.ORIGIN],
