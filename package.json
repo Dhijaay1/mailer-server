@@ -4,8 +4,8 @@
   "description": "automated mail",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon app.ts",
-    "start:dev": "nodemon app.ts",
+    "start": "ts-node  app",
+    "start:dev": "nodemon app",
     "build": "tsc",
     "heroku-postbuild": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -33,7 +33,6 @@
     "nodemailer": "^6.9.9",
     "pdf-parse": "^1.1.1",
     "react-router-dom": "^6.22.0",
-    "serve": "^14.2.4",
     "textract": "^2.5.0",
     "ws": "^8.16.0"
   }
