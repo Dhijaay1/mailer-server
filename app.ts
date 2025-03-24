@@ -25,11 +25,11 @@ app.use(
 
 const upload = multer({ dest: "uploads/" });
 
-app.get("/", async (req: Request, res: Response) => {
+app.get("/api", async (req: Request, res: Response) => {
   res.send("Welcome to")
 });
 
-app.post("/auth", async (req: Request, res: Response) => {
+app.post("/api/auth", async (req: Request, res: Response) => {
   const { token } = req.body;
   const generatedToken = process.env.ACCESS_TOKEN;
 
@@ -45,7 +45,7 @@ app.post("/auth", async (req: Request, res: Response) => {
 });
 
 app.post(
-  "/upload",
+  "/api/upload",
   upload.single("file"),
   async (req: Request, res: Response) => {
     try {
@@ -116,7 +116,7 @@ app.post(
 );
 
 app.post(
-  "/verify",
+  "/api/verify",
   upload.single("file"),
   async (req: Request, res: Response) => {
     try {
