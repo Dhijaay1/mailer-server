@@ -25,6 +25,10 @@ app.use(
 
 const upload = multer({ dest: "uploads/" });
 
+app.get("/", async (req: Request, res: Response) => {
+  res.send("Welcome to BulkMailer")
+});
+
 app.post("/auth", async (req: Request, res: Response) => {
   const { token } = req.body;
   const generatedToken = process.env.ACCESS_TOKEN;
