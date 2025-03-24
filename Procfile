@@ -1,1 +1,1 @@
-web:ts-node app.ts
+web:nodemon app.ts

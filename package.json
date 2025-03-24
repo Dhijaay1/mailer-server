@@ -4,7 +4,7 @@
   "description": "automated mail",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node  app.ts",
+    "start": "nodemon app.ts",
     "start:dev": "nodemon app.ts",
     "build": "tsc",
     "heroku-postbuild": "npm run build",
