@@ -2,41 +2,23 @@ import express, { Express, Request, Response } from "express";
 import multer from "multer";
 import fs from "fs";
 import { emailServer } from "./src/utils/smtpServer";
-import { tokenGenerator, verifyToken } from "./src/utils/tokenGenerator";
 import cors from "cors";
-import WebSocket from "ws";
-import { pinDataOnIPFs } from "./src/utils/pinata";
 
 require("dotenv").config();
-
-let clientId: string;
 
 const app: Express = express();
 
 const port = 7000;
 
-const server = app.listen(port, () => {
+app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
-
-// export const wss = new WebSocket.Server({ server });
-
-// wss.on("connection", function connection(ws) {
-//   console.log("Client connected");
-
-//   // WebSocket message handler
-//   ws.on("message", function incoming(message) {
-//     console.log("received: %s", message);
-//     const data = JSON.parse(message.toString());
-//     const clientId = data.client;
-//   });
-// });
 
 app.use(express.json());
 
 app.use(
   cors({
-    origin: ["http://localhost:4629"],
+    origin: [process.env.origin],
     credentials: true,
   })
 );
@@ -49,11 +31,8 @@ app.post("/auth", async (req: Request, res: Response) => {
   const generatedToken = process.env.ACCESS_TOKEN;
 
   if (generatedToken === token) {
-    const clientToken = tokenGenerator(token);
-
     res.send({
       canProceed: true,
-      clientToken: clientToken,
     });
   } else {
     res.send({
@@ -87,17 +66,6 @@ app.post(
       const text = data.toString();
       const separatedText = text.split(/\s+/).filter(Boolean);
 
-      console.log(separatedText, "uie");
-      const dataToIpfs = {
-        data: separatedText,
-      };
-
-      try {
-        // const data = await pinDataOnIPFs(dataToIpfs);
-        // console.log("Data Pinned:", data);
-      } catch (error: any) {
-        console.log(error, "error");
-      }
       const body = [];
       let i = 0;
       while (i < separatedText.length) {
@@ -117,8 +85,6 @@ app.post(
 
         i += 5;
       }
-
-      console.log(body, "llll");
 
       const emailData = {
         ...req.body,

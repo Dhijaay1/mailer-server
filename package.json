@@ -6,6 +6,7 @@
   "scripts": {
     "start": "nodemon app.ts",
     "start:dev": "nodemon app.ts",
+    "heroku-postbuild": "npm run build",
     "generate:token": "src/utils/accessTokenGenerator.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

@@ -1,12 +1,4 @@
 import nodemailer, { Transporter } from "nodemailer";
-// import { wss } from "../../app";
-import { retrieveAllDataFromPinata, pinDataOnIPFs } from "./pinata";
-
-// export const sendWebSocketMessage = (message: any, origin: string) => {
-//   wss.clients.forEach((client) => {
-//     client.send(JSON.stringify({ message, origin }));
-//   });
-// };
 
 export type EmailConfigProps = {
   email: string;
@@ -47,7 +39,6 @@ export const emailServer = async (
       debug: true,
     });
 
-    // Create a promise that resolves after 3 seconds
     const delay = (ms: number) =>
       new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -64,14 +55,6 @@ export const emailServer = async (
         );
       }
 
-      const dataToIpfs: any = {
-        employerFirstName: emailBody.senderFirstName,
-        employerLastName: emailBody.senderFirstName,
-        workerFirstName: emailBody.recipientFirstName,
-        workerLastName: emailBody.recipientLastName,
-        workerEmail: emailBody.recipientEmail,
-      };
-
       const mailOptions: nodemailer.SendMailOptions = {
         from: `<i***@gmail.com> ${emailBody.senderFirstName} ${emailBody.senderLastName}`,
         to: emailBody.recipientEmail,
@@ -79,27 +62,12 @@ export const emailServer = async (
         text: `Dear ${emailBody.recipientFirstName},\n\n${config.content}\n\n\n${config.greetings}, \n${emailBody.senderFirstName} ${emailBody.senderLastName}`,
       };
 
-      // Send email after waiting for 3 seconds
       await delay(4000);
 
       const info = await transporter.sendMail(mailOptions);
 
-      console.log("Email sent:", info.response);
-
-      // try{
-      //   const data = await pinDataOnIPFs(dataToIpfs)
-      //   console.log("Data Pinned:", data);
-
-      // }catch(error:any) {
-      //   console.log(error,"error")
-      // }
-
-      // sendWebSocketMessage(info.envelope, config.origin);
-
       sentEmails.push(info);
     }
-    // const getAllPinnedData = await retrieveAllDataFromPinata();
-    // console.log(JSON.stringify(getAllPinnedData), "allPinned");
     return {
       success: true,
       data: sentEmails,
