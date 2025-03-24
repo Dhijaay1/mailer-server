@@ -16,12 +16,12 @@ app.listen(port, () => {
 
 app.use(express.json());
 
-// app.use(
-//   cors({
-//     origin: [process.env.origin],
-//     credentials: true,
-//   })
-// );
+app.use(
+  cors({
+    origin: [process.env.origin],
+    credentials: true,
+  })
+);
 
 const upload = multer({ dest: "uploads/" });
 
