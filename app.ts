@@ -26,7 +26,6 @@ app.use(
 const upload = multer({ dest: "uploads/" });
 
 app.post("/auth", async (req: Request, res: Response) => {
-  console.log(req, "users");
   const { token } = req.body;
   const generatedToken = process.env.ACCESS_TOKEN;
 
