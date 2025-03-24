@@ -8,10 +8,8 @@ require("dotenv").config();
 
 const app: Express = express();
 
-const port = 7000;
-
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+app.listen(process.env.PORT || 7000, () => {
+  console.log(`Server is running on port ${process.env.PORT || 7000}`);
 });
 
 app.use(express.json());
@@ -26,7 +24,7 @@ app.use(
 const upload = multer({ dest: "uploads/" });
 
 app.get("/api", async (req: Request, res: Response) => {
-  res.send("Welcome to bulk-mailer")
+  res.send("Welcome to bulk-mailer");
 });
 
 app.post("/api/auth", async (req: Request, res: Response) => {
