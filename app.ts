@@ -36,7 +36,8 @@ app.get("/api", async (req: Request, res: Response) => {
 
 app.post("/api/auth", async (req: Request, res: Response) => {
   const { token } = req.body;
-  const generatedToken = process.env.ACCESS_TOKEN;
+  const generatedToken = "f9a2b1d3-84c7-4f29-a38d-b7f6c2e915ae";
+  // const generatedToken = process.env.ACCESS_TOKEN;
 
   if (generatedToken === token) {
     res.send({
