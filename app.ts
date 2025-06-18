@@ -23,7 +23,7 @@ app.use((req, res, next) => {
 
 app.use(
   cors({
-    origin: "http://localhost:9906",
+    origin: "http://localhost:7128",
     credentials: true,
   })
 );
